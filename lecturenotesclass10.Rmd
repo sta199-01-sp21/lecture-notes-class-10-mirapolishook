@@ -1,7 +1,7 @@
 ---
 title: "Introduction to probability"
-author: ""
-date: ""
+author: "Mira Polishook"
+date: "February 22, 2021"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -48,18 +48,28 @@ xtabs(~ Treatment + Improved, data = Arthritis) %>%
   addmargins()
 ```
 
-- How many patients were enrolled in the clinical trial?
+- How many patients were enrolled in the clinical trial? 
+
+84 patients total.
 
 - What is the probability a randomly selected patient received the placebo?
+
+43/84 = 0.51
 
 - What is the probability a randomly selected patient received the placebo
   and had a marked improvement?
   
+7/84 = 0.083 
+  
 - What is the probability a randomly selected patient received the placebo
   and the treatment?
   
+Not possible. 0%. 
+  
 - What is the probability a randomly selected patient had some improvement or
   was on the treatment?
+  
+(41+7)/84 = 0.57
 
 ## Using computer simulations to calculate probabilities
 
@@ -73,8 +83,13 @@ marbles <- c("red", "red", "white", "red", "blue", "blue", "red", "blue")
 ```
 
 Suppose we draw a single marble from our imaginary box, where all the marbles
-are equally likely to be selected. What is the probability the marble is blue? 
+are equally likely to be selected. What is the probability the marble is blue?
+
+3/8 = 0.375
+
 How about white?
+
+1/8 = 0.125
 
 We can simulate this "drawing" with the `sample()` function.
 
@@ -92,7 +107,7 @@ of eight marbles each time. This way we can easily simulate our marble-drawing
 experiment.
 
 ```{r simulate_draws}
-draw_results <- sample(marbles, size = 10000, replace = TRUE)
+draw_results <- sample(marbles, size = 1000000, replace = TRUE)
 ```
 
 ```{r summarize_draws}
@@ -101,6 +116,8 @@ prop.table(counts)
 ```
 
 How close is this value to the "true" probability?
+
+Very close! Law if large numbers!
 
 **To summarize our process:**
 
@@ -118,6 +135,8 @@ compute this theoretically yet, but this is what computers are good at.
 
 Before we do this, what is your guess as to what the probability will be?
 
+Unlikely to occur. 
+
 We'll still use `sample()` to run our simulation many times, but we'll
 use `dplyr` functions to compute the relative frequencies.
 
@@ -131,6 +150,8 @@ two_draw_results
 
 How can we add a variable to `two_draw_results` to see if `draw_1` and `draw_2`
 match?
+
+Use the mutate function. 
 
 ```{r identify_matches}
 two_draw_results <- two_draw_results %>% 
@@ -150,12 +171,13 @@ two_draw_results %>%
 ## Practice
 
 Suppose you roll two fair six-sided dice. Which has a higher probability:
-the square of dice roll 1 is equal to dice roll 2; or the absolute value of the
-difference between dice roll 1 and dice roll 2 is equal to 4.
+the square of dice roll 1 is equal to dice roll 2; or the absolute value of the difference between dice roll 1 and dice roll 2 is equal to 4.
 
 Perform a simulation to compute this empirical probability.
 
 Write down your guess to the answer before you calculate it.
+
+
 
 ```{r simulate_rolls}
 
